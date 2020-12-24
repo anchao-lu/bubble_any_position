@@ -22,3 +22,6 @@ ClipPath(
       child: Text('test custom clipper'),
     );
 ```
+
+## 注意
+### bubble 所在边应该留出 bubble 高度对应的 padding
