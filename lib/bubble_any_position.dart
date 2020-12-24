@@ -1,5 +1,3 @@
-library bubble_any_position;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +5,7 @@ import 'package:flutter/material.dart';
 /// 作者：monkey
 /// 描述：
 
-/// bubble 位置
+/// 尖角位置
 enum BubbleType {
   leftTop,
   leftCenter,
@@ -23,14 +21,13 @@ enum BubbleType {
   bottomRight
 }
 
-/// bubble 裁剪
 class BubbleClipper extends CustomClipper<Path> {
   BubbleClipper(
       {this.bubbleType = BubbleType.topLeft,
       this.bubbleW = 10.0,
       this.bubbleH = 8.0,
       this.bubbleTop = 10.0,
-      this.radius = 15.0})
+      this.radius = 4.0})
       : super();
 
   /// bubble 位置：上左下右
@@ -68,8 +65,6 @@ class BubbleClipper extends CustomClipper<Path> {
       case BubbleType.rightCenter:
       case BubbleType.rightBottom:
         return _rightBubblePath(size);
-      default:
-        return Path();
     }
   }
 
@@ -131,8 +126,6 @@ class BubbleClipper extends CustomClipper<Path> {
       case BubbleType.bottomRight:
         _bubbleTop = size.width - bubbleTop - bubbleW - radius;
         break;
-      default:
-        break;
     }
     Path path = Path()
       ..moveTo(radius, size.height - bubbleH)
@@ -145,7 +138,7 @@ class BubbleClipper extends CustomClipper<Path> {
       // 右下角
       ..lineTo(size.width - radius, size.height - bubbleH)
       // 圆角
-      ..arcToPoint(Offset(size.width, size.height - radius),
+      ..arcToPoint(Offset(size.width, size.height - radius - bubbleH),
           radius: Radius.circular(radius), clockwise: false)
       // 右上角
       ..lineTo(size.width, radius)
@@ -158,7 +151,7 @@ class BubbleClipper extends CustomClipper<Path> {
       ..arcToPoint(Offset(0, radius),
           radius: Radius.circular(radius), clockwise: false)
       // 左下角
-      ..lineTo(0, size.height - radius)
+      ..lineTo(0, size.height - radius - bubbleH)
       // 圆角
       ..arcToPoint(Offset(radius, size.height - bubbleH),
           radius: Radius.circular(radius), clockwise: false)
@@ -178,8 +171,6 @@ class BubbleClipper extends CustomClipper<Path> {
       case BubbleType.leftBottom:
         _bubbleTop = size.height - bubbleTop - bubbleW - radius;
         break;
-      default:
-        break;
     }
     Path path = Path()
       ..moveTo(bubbleH, radius)
@@ -192,7 +183,7 @@ class BubbleClipper extends CustomClipper<Path> {
       // 左下角
       ..lineTo(bubbleH, size.height - radius)
       // 圆角
-      ..arcToPoint(Offset(radius, size.height),
+      ..arcToPoint(Offset(bubbleH + radius, size.height),
           radius: Radius.circular(radius), clockwise: false)
       // 右下角
       ..lineTo(size.width - radius, size.height)
@@ -225,8 +216,6 @@ class BubbleClipper extends CustomClipper<Path> {
       case BubbleType.rightBottom:
         _bubbleTop = size.height - bubbleTop - bubbleW - radius;
         break;
-      default:
-        break;
     }
     Path path = Path()
       ..moveTo(size.width - bubbleH, radius)
@@ -239,7 +228,7 @@ class BubbleClipper extends CustomClipper<Path> {
       // 右下角
       ..lineTo(size.width - bubbleH, size.height - radius)
       // 圆角
-      ..arcToPoint(Offset(size.width - radius, size.height),
+      ..arcToPoint(Offset(size.width - radius - bubbleH, size.height),
           radius: Radius.circular(radius))
       // 左下角
       ..lineTo(radius, size.height)
