@@ -1,6 +1,6 @@
 # bubble_any_position
 
-A new Flutter package.
+自定义 Clipper 实现任意位置 bubble
 
 ## Getting Started
 
