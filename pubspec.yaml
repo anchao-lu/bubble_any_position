@@ -3,3 +3,6 @@ description: 一个支持任意位置应用 bubble 的 Clipper
 version: 0.0.1
 author: Lanch92
 homepage: https://github.com/Lanch92/bubble_any_position
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
